@@ -1,6 +1,7 @@
 package com.workintech.fswebs17d1.controller;
 
 import com.workintech.fswebs17d1.entity.Animal;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,6 +12,9 @@ import java.util.Map;
 @RestController
 public class AnimalController {
     private Map<Integer, Animal> animals = new HashMap<>();
+
+    @Value("${course.name}")
+    private String courseName;
 
     @GetMapping("/workintech/animal")
     public List<Animal> getAllAnimals(){
@@ -38,5 +42,10 @@ public class AnimalController {
     public Animal deleteAnimal(@PathVariable int id){
         animals.remove(id);
         return animals.get(id);
+    }
+
+    @GetMapping("/workintech/course")
+    public String getCourseName(){
+        return courseName;
     }
 }
